@@ -1,9 +1,11 @@
 import React from "react";
 import { useGlobalContext } from "../contexts/CocktailContext";
 import Loading from "../components/Loading";
+import Cocktail from "./Cocktail";
 
 const CocktailList = () => {
   const { cocktails, loading } = useGlobalContext();
+  // console.log(cocktails);
   if (loading) {
     return <Loading />;
   }
@@ -14,7 +16,16 @@ const CocktailList = () => {
       </h2>
     );
   }
-  return <div>CocktailList</div>;
+  return (
+    <section className="section">
+      <h2 className="section-title">cocktails</h2>
+      <div className="cocktails-center">
+        {cocktails.map((item) => {
+          return <Cocktail key={item.id} {...item} />;
+        })}
+      </div>
+    </section>
+  );
 };
 
 export default CocktailList;
